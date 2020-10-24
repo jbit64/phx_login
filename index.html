@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Transparent Login Form with Bootstrap 4</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+  <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body onload="initClock()">
+
+  <div class="modal-dialog text-center">
+    <div class="col-sm-8 main-section">
+      <div class="modal-content">
+
+        <div class="col-12 user-img">
+          <img src="img/sammy.jpg" alt="user-img">
+          </div>
+
+
+          <form class="col-12">
+            <div class="form-group">
+              <input type="text" class="form-control user" placeholder="Enter Username">
+              <input type="password" class="form-control password" placeholder="Enter Password">
+              <button type="submit" class="btn"><i class="fas fa-sign-in-alt"></i>Login</button>
+
+            </div>
+          </form>
+
+          <div class="col-12 forgot">
+            <a href="#">Forgot Password?</a>
+          </div>
+
+        </div>
+
+      </div>
+      <!--End of Modal Content -->
+    </div>
+  </div>
+
+
+
+
+<!--digital clock start-->
+<div class="datetime">
+  <div class="date">
+    <span id="dayname">Day</span>,
+    <span id="month">Month</span>
+    <span id="daynum">00</span>,
+    <span id="year">Year</span>
+  </div>
+  <div class="time">
+    <span id="hour">00</span>:
+    <span id="minutes">00</span>:
+    <span id="seconds">00</span>
+    <span id="period">AM</span>
+  </div>
+</div>
+<!--digital clock end-->
+
+<script type="text/javascript">
+function updateClock(){
+  var now = new Date();
+  var dname = now.getDay(),
+      mo = now.getMonth(),
+      dnum = now.getDate(),
+      yr = now.getFullYear(),
+      hou = now.getHours(),
+      min = now.getMinutes(),
+      sec = now.getSeconds(),
+      pe = "AM";
+
+      if(hou >= 12){
+        pe = "PM";
+      }
+      if(hou == 0){
+        hou = 12;
+      }
+      if(hou > 12){
+        hou = hou - 12;
+      }
+
+      Number.prototype.pad = function(digits){
+        for(var n = this.toString(); n.length < digits; n = 0 + n);
+        return n;
+      }
+
+      var months = ["January", "February", "March", "April", "May", "June", "July", "Augest", "September", "October", "November", "December"];
+      var week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      var ids = ["dayname", "month", "daynum", "year", "hour", "minutes", "seconds", "period"];
+      var values = [week[dname], months[mo], dnum.pad(2), yr, hou.pad(2), min.pad(2), sec.pad(2), pe];
+      for(var i = 0; i < ids.length; i++)
+      document.getElementById(ids[i]).firstChild.nodeValue = values[i];
+}
+
+function initClock(){
+  updateClock();
+  window.setInterval("updateClock()", 1);
+}
+</script>
+
+
+
+
+</body>
+
+</html>
